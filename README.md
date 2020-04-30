@@ -19,3 +19,11 @@ The Aristo Mini corpus contains 1,197,377 science-relevant sentences drawn from 
 ## Implementation
 This code is written in **C** programming language. Using **MPI** Library and using **Master-Slave paradigm.**
 
+## Testing the Program
+To test this program, you should run a VM VirtualBox on your OS.
+You can run it through these commands after putting source file in Shared folder:
+
+`mpicc SearchHelper.c -o SearchHelper.o` **For Compiling the code**
+`mpiexec -n 3 ./SearchHelper.o` **For Running the code**
+
+*hint:* 3 is number of ranks, it is changeable.
