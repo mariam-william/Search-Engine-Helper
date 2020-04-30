@@ -32,6 +32,17 @@ int main(int argc, char* argv[]) {
 		query[idx] = '\0';
 		nQueries = searchQuery(1, nFiles, rank);
 		printf("Rank %d result is: %d\n", rank, nQueries);
+		printf("\nTotal Queries = %d\n", nQueries);
+		
+		FILE* fp1;
+		char filename[50];
+		sprintf(filename, "Total_Queries_Result.txt");
+		fp1 = fopen(filename, "w");
+		fprintf(fp1, "Query: %s \n", query);
+		fprintf(fp1, "Search Results Found = %d\n", nQueries);
+
+		endTime = MPI_Wtime();
+		printf("\nProcessing time = %lf seconds\n", endTime - startTime);
 	}
 
 	else { // Parallel program case
@@ -58,7 +69,7 @@ int main(int argc, char* argv[]) {
 			}
 			// Handling Remainder in Master
 			if (remProcess_Size > 0) {
-				printf("Rem: %d\n", remProcess_Size);
+				//printf("Rem: %d\n", remProcess_Size);
 				start = nFiles - (remProcess_Size + 1);
 				nQueries = searchQuery(start, nFiles, rank);
 				printf("Rank %d result is: %d\n", rank, nQueries);
@@ -86,7 +97,8 @@ int main(int argc, char* argv[]) {
 
 			sprintf(filename, "Total_Queries_Result.txt");
 			fp1 = fopen(filename, "w");
-			fprintf(fp1, "Total Search Results found = %d\n", totalQueries);
+			fprintf(fp1, "Query: %s \n", query);
+			fprintf(fp1, "Search Results Found = %d\n", totalQueries);
 
 			endTime = MPI_Wtime();
 			printf("\nProcessing time = %lf seconds\n", endTime - startTime);
@@ -123,19 +135,15 @@ int searchQuery(int start, int end, int my_rank) {
 			return;
 		}
 		int count = 0;
-		//printf("here");
 		while (fgets(line, sizeof(line), fp) != NULL)
 		{
 			strcpy(newQ, query);
-
 			found = 1;
 			char* tempQuery = strtok(newQ, delim);
 			while (tempQuery != NULL) {
 				char tempLine[350];
 				strcpy(tempLine, line);
-
 				word = strstr(tempLine, tempQuery);
-
 				if (!word) {
 					found = -1;
 					break;
@@ -145,7 +153,6 @@ int searchQuery(int start, int end, int my_rank) {
 			}
 			if (found == 1) {
 				fputs(line, fp2);
-				//fputc('\n', fp2);
 				foundCount++;
 			}
 		}
