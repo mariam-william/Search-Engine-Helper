@@ -58,7 +58,7 @@ int main(int argc, char* argv[]) {
 			}
 			// Handling Remainder in Master
 			if (remProcess_Size > 0) {
-				printf("Rem: %d\n", remProcess_Size);
+				//printf("Rem: %d\n", remProcess_Size);
 				start = nFiles - (remProcess_Size + 1);
 				nQueries = searchQuery(start, nFiles, rank);
 				printf("Rank %d result is: %d\n", rank, nQueries);
@@ -123,19 +123,15 @@ int searchQuery(int start, int end, int my_rank) {
 			return;
 		}
 		int count = 0;
-		//printf("here");
 		while (fgets(line, sizeof(line), fp) != NULL)
 		{
 			strcpy(newQ, query);
-
 			found = 1;
 			char* tempQuery = strtok(newQ, delim);
 			while (tempQuery != NULL) {
 				char tempLine[350];
 				strcpy(tempLine, line);
-
 				word = strstr(tempLine, tempQuery);
-
 				if (!word) {
 					found = -1;
 					break;
@@ -145,7 +141,6 @@ int searchQuery(int start, int end, int my_rank) {
 			}
 			if (found == 1) {
 				fputs(line, fp2);
-				//fputc('\n', fp2);
 				foundCount++;
 			}
 		}
