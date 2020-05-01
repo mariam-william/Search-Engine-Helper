@@ -8,7 +8,7 @@ A parallel program to search a given corpus and return the most relevant search 
 * April 2020: V1
 
 ### Code Author
-* **Mariam Makram**  - [mariammakram](https://github.com/mariammakram)
+* **Marriam Makram**  - [mariammakram](https://github.com/mariammakram)
 * **Lauren Safwat**  - [lauren-safwat](https://github.com/lauren-safwat)
 
 ### What is Aristo Mini Corpus
